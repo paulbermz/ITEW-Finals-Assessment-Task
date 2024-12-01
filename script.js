@@ -1,3 +1,46 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const bioElements = document.querySelectorAll(".bio");
+
+  bioElements.forEach((bio) => {
+    const fullText = bio.getAttribute("data-bio");
+    const toggleButton = bio.nextElementSibling;
+
+    // Truncate the bio initially to two lines
+    const truncatedText = truncateText(fullText, 100); // Adjust character count for your design
+    bio.textContent = truncatedText;
+
+    toggleButton.addEventListener("click", function () {
+      if (bio.textContent === fullText) {
+        // Collapse to truncated text
+        bio.textContent = truncatedText;
+        toggleButton.textContent = "See More";
+      } else {
+        // Expand to full text
+        bio.textContent = fullText;
+        toggleButton.textContent = "See Less";
+      }
+    });
+  });
+
+  // Helper function to truncate text
+  function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  }
+});
+
+document.querySelectorAll(".toggle-bio").forEach((button) => {
+  button.addEventListener("click", function () {
+    const bio = this.previousElementSibling; // Get the bio paragraph
+    bio.classList.toggle("expanded");
+    this.textContent = bio.classList.contains("expanded")
+      ? "See Less"
+      : "See More";
+  });
+});
+
 function navigateToVideoPage(event) {
   event.preventDefault();
 
@@ -231,7 +274,129 @@ function navigateTo(event, element) {
       navigateToVideoPage(event);
       break;
     case "marketplace":
-      newsFeed.innerHTML = `<h3 class="text-center">🏪 Marketplace Coming Soon!</h3>`;
+      newsFeed.innerHTML = `
+          <div id="marketplaceContainer" class="container-fluid">
+            <h3 class="text-center">🛒Marketplace</h3>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>The Godfather DVD</td>
+                  <td>Movies</td>
+                  <td>$19.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Inception Blu-Ray</td>
+                  <td>Movies</td>
+                  <td>$24.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Marvel's Avengers DVD</td>
+                  <td>Movies</td>
+                  <td>$29.99</td>
+                  <td>Out of Stock</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Interstellar Blu-Ray</td>
+                  <td>Movies</td>
+                  <td>$22.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>The Dark Knight DVD</td>
+                  <td>Movies</td>
+                  <td>$19.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Forrest Gump Blu-Ray</td>
+                  <td>Movies</td>
+                  <td>$18.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Pulp Fiction DVD</td>
+                  <td>Movies</td>
+                  <td>$15.99</td>
+                  <td>Out of Stock</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>The Matrix Blu-Ray</td>
+                  <td>Movies</td>
+                  <td>$20.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Star Wars DVD Collection</td>
+                  <td>Movies</td>
+                  <td>$79.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Gladiator Blu-Ray</td>
+                  <td>Movies</td>
+                  <td>$21.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>Jurassic Park DVD</td>
+                  <td>Movies</td>
+                  <td>$14.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Shawshank Redemption Blu-Ray</td>
+                  <td>Movies</td>
+                  <td>$18.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>The Lion King DVD</td>
+                  <td>Movies</td>
+                  <td>$12.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>Harry Potter Blu-Ray Collection</td>
+                  <td>Movies</td>
+                  <td>$89.99</td>
+                  <td>In Stock</td>
+                </tr>
+                <tr>
+                  <td>15</td>
+                  <td>Frozen DVD</td>
+                  <td>Movies</td>
+                  <td>$13.99</td>
+                  <td>Out of Stock</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
       break;
     case "toDoList":
       newsFeed.innerHTML = `

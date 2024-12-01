@@ -330,6 +330,29 @@ p {
   transition: color 0.3s;
 }
 
+.bio {
+  display: block;
+  max-height: 4.8em;
+  line-height: 1.5em;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.bio.expanded {
+  max-height: none;
+}
+
+.toggle-bio {
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.toggle-bio:hover {
+  text-decoration: underline;
+}
+
 /* Buttons */
 button {
   background-color: #f8f9fa;
@@ -474,7 +497,7 @@ iframe {
 
 /* Newsfeed Container */
 #newsFeedContainer {
-  height: calc(100vh - 80px);
+  height: 130vh;
   overflow-y: auto;
   padding: 15px;
   position: relative;
@@ -494,20 +517,102 @@ iframe {
   background-color: #999;
 }
 
-/* Movie Image Styling */
-.movie-image {
-  width: 100%;
-  max-width: 1000px;
-  height: 500px;
-  object-fit: cover;
-  margin-top: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Marketplace Section */
+#marketplaceContainer {
+  background-color: #f8f9fa; /* Default Light Mode */
+  padding: 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-.movie-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+/* Dark Mode Styling */
+body.dark-mode #marketplaceContainer {
+  background-color: #343a40; /* Dark Mode background */
+  color: white; /* Text color for better visibility */
 }
+
+.table {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+body.dark-mode .table {
+  background-color: #454d55; /* Dark Mode table background */
+  color: white; /* Dark Mode text color */
+}
+
+.table th,
+.table td {
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+body.dark-mode .table th,
+body.dark-mode .table td {
+  border-color: #555; /* Darker borders for dark mode */
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+body.dark-mode .table-striped tbody tr:nth-child(odd) {
+  background-color: #3e444b; /* Darker striped rows */
+}
+
+.table-striped tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+body.dark-mode .table-striped tbody tr:hover {
+  background-color: #50585f; /* Darker hover color */
+}
+
+.table th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+body.dark-mode .table th {
+  background-color: #0056b3;
+}
+
+/* Active State Styling for Sidebar */
+.app-item a.active {
+  color: #000000;
+  font-weight: bold;
+}
+
+.app-item a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px;
+  display: block;
+  transition: color 0.3s ease;
+}
+
+body.dark-mode .app-item a {
+  color: #f8f9fa;
+}
+
+.app-item a:hover {
+  color: #007bff;
+}
+
+h3.text-center {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+body.dark-mode h3.text-center {
+  color: white;
+}
+
 /* Welcome Quotes Section */
 #welcomeQuotes {
   background-color: #003a75;
@@ -1159,7 +1264,7 @@ body.dark-mode #taskList .delete-button:hover {
   margin-right: 10px;
 }
 
-@media (max-width: 1071px) {
+@media (max-width: 1274px) {
   .container-fluid .row {
     flex-direction: column;
   }
