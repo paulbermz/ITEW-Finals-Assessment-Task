@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Verse</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow"
+      id="navbar"
+    >
+      <div class="container-fluid d-flex align-items-center">
+        <!-- Brand and Search Box -->
+        <div class="d-flex align-items-center">
+          <!-- Navbar Brand with Movie Icon -->
+          <a class="navbar-brand me-3" href="#">
+            <i class="bi bi-film me-2" onclick="navigateTo('home')"></i>
+          </a>
+
+          <!-- Search Box -->
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </form>
+        </div>
+
+        <!-- Navbar Toggler for small screens -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a
+                id="homeIcon"
+                class="nav-link"
+                href="#home"
+                data-app="home"
+                title="Home"
+                onclick="navigateTo(event, this)"
+              >
+                <i class="bi bi-house-door-fill"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                id="videoIcon"
+                class="nav-link"
+                href="#video"
+                data-app="video"
+                title="Video"
+                onclick="navigateTo(event, this)"
+              >
+                <i class="bi bi-play-btn-fill"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                id="marketplaceIcon"
+                class="nav-link"
+                href="#marketplace"
+                data-app="marketplace"
+                title="Marketplace"
+                onclick="navigateTo(event, this)"
+              >
+                <i class="bi bi-shop-window"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                id="toDoListIcon"
+                class="nav-link"
+                href="#toDoList"
+                data-app="toDoList"
+                title="To-Do List"
+                onclick="navigateTo(event, this)"
+              >
+                <i class="bi bi-check-circle"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                id="slotMachineIcon"
+                class="nav-link"
+                href="#slotMachine"
+                data-app="slotMachine"
+                title="Gaming"
+                onclick="navigateTo(event, this)"
+              >
+                <i class="bi bi-controller"></i>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Dark Mode / Light Mode Toggle -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="themeToggle">
+                <i class="bi bi-moon"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-5 pt-4">
+      <div class="row">
+        <!-- Left Sidebar -->
+        <div class="col-md-3 bg-light p-3">
+          <h5>Team Members</h5>
+          <ul class="list-unstyled">
+            <li class="team-member">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="images/acala.png"
+                  alt="Team Member 1"
+                  class="rounded-circle me-2"
+                />
+                <div>
+                  <strong>John Bryan Acala</strong>
+                  <br />
+                  <small>Project Manager</small>
+                </div>
+              </div>
+              <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="me-2"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a href="https://instagram.com" target="_blank" class="me-2"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                <a href="https://twitter.com" target="_blank" class="me-2"
+                  ><i class="bi bi-twitter"></i
+                ></a>
+                <a href="https://linkedin.com" target="_blank"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
+              </div>
+            </li>
+            <li class="team-member">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="https://via.placeholder.com/40"
+                  alt="Team Member 2"
+                  class="rounded-circle me-2"
+                />
+                <div>
+                  <strong>Andrie Algara</strong>
+                  <br />
+                  <small>Designer</small>
+                </div>
+              </div>
+              <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="me-2"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a href="https://instagram.com" target="_blank" class="me-2"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                <a href="https://twitter.com" target="_blank" class="me-2"
+                  ><i class="bi bi-twitter"></i
+                ></a>
+                <a href="https://linkedin.com" target="_blank"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
+              </div>
+            </li>
+            <li class="team-member">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="https://via.placeholder.com/40"
+                  alt="Team Member 3"
+                  class="rounded-circle me-2"
+                />
+                <div>
+                  <strong>Mary Claire Alotencio</strong>
+                  <br />
+                  <small>Marketing</small>
+                </div>
+              </div>
+              <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="me-2"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a href="https://instagram.com" target="_blank" class="me-2"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                <a href="https://twitter.com" target="_blank" class="me-2"
+                  ><i class="bi bi-twitter"></i
+                ></a>
+                <a href="https://linkedin.com" target="_blank"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
+              </div>
+            </li>
+            <li class="team-member">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="images/paul.png"
+                  alt="Team Member 4"
+                  class="rounded-circle me-2"
+                />
+                <div>
+                  <strong>Paul Bernal</strong>
+                  <br />
+                  <small>Developer</small>
+                </div>
+              </div>
+              <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="me-2"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a href="https://instagram.com" target="_blank" class="me-2"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                <a href="https://twitter.com" target="_blank" class="me-2"
+                  ><i class="bi bi-twitter"></i
+                ></a>
+                <a href="https://linkedin.com" target="_blank"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
+              </div>
+            </li>
+            <li class="team-member">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="https://via.placeholder.com/40"
+                  alt="Team Member 5"
+                  class="rounded-circle me-2"
+                />
+                <div>
+                  <strong>John Lei Gacusana</strong>
+                  <br />
+                  <small>Content Writer</small>
+                </div>
+              </div>
+              <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="me-2"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a href="https://instagram.com" target="_blank" class="me-2"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                <a href="https://twitter.com" target="_blank" class="me-2"
+                  ><i class="bi bi-twitter"></i
+                ></a>
+                <a href="https://linkedin.com" target="_blank"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- News Feed -->
+        <div id="newsFeedContainer" class="col-md-6 p-3">
+          <!-- Welcome Quotes Section -->
+          <div id="welcomeQuotes" class="card mb-3">
+            <div class="card-body text-center">
+              <h3 class="mb-3">Welcome to MovieVerse!</h3>
+              <p class="mb-0">
+                "Dive into the magic of cinema and explore the latest hits and
+                timeless classics."
+              </p>
+            </div>
+          </div>
+          <!-- Example Post 1 with correct image path -->
+          <div id="post1" class="card mb-3">
+            <div class="card-header d-flex align-items-center">
+              <img
+                src="https://via.placeholder.com/40"
+                alt="User"
+                class="rounded-circle me-2"
+              />
+              <div>
+                <strong>User Name</strong>
+                <br />
+                <small>5 mins ago</small>
+              </div>
+            </div>
+            <div class="card-body">
+              <p>Check out the latest Marvel movie poster!</p>
+              <img
+                src="images/blackhawk.png"
+                alt="Marvel Movie Poster"
+                class="img-fluid rounded movie-image"
+              />
+            </div>
+            <div class="card-footer d-flex justify-content-around">
+              <button class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-hand-thumbs-up"></i> React
+              </button>
+              <button class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-chat"></i> Comment
+              </button>
+              <button class="btn btn-outline-success btn-sm">
+                <i class="bi bi-share"></i> Share
+              </button>
+            </div>
+          </div>
+
+          <!-- Example Post 2 -->
+          <div id="post2" class="card mb-3">
+            <div class="card-header d-flex align-items-center">
+              <img
+                src="https://via.placeholder.com/40"
+                alt="User"
+                class="rounded-circle me-2"
+              />
+              <div>
+                <strong>Jane Doe</strong>
+                <br />
+                <small>2 hours ago</small>
+              </div>
+            </div>
+            <div class="card-body">
+              <p>Here’s a glimpse of the upcoming animated film!</p>
+              <img
+                src="images/blackhawk.png"
+                alt="Animated Movie Poster"
+                class="img-fluid rounded movie-image"
+              />
+            </div>
+            <div class="card-footer d-flex justify-content-around">
+              <button class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-hand-thumbs-up"></i> React
+              </button>
+              <button class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-chat"></i> Comment
+              </button>
+              <button class="btn btn-outline-success btn-sm">
+                <i class="bi bi-share"></i> Share
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-md-3 bg-light p-3">
+          <h5>Applications</h5>
+          <ul class="list-unstyled">
+            <li class="app-item">
+              <a
+                href="#toDoList"
+                data-app="toDoList"
+                onclick="navigateTo(event, this)"
+                class="d-flex align-items-center"
+              >
+                <i class="bi bi-list-check me-2"></i> To-Do List App
+              </a>
+            </li>
+            <li class="app-item">
+              <a
+                href="#slotMachine"
+                data-app="slotMachine"
+                onclick="navigateTo(event, this)"
+                class="d-flex align-items-center"
+              >
+                <i class="bi bi-controller me-2"></i> Slot Machine
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
