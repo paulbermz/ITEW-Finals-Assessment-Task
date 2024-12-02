@@ -519,28 +519,28 @@ iframe {
 
 /* Marketplace Section */
 #marketplaceContainer {
-  background-color: #f8f9fa; /* Default Light Mode */
+  background-color: #f8f9fa;
   padding: 20px;
   border-radius: 8px;
-  transition: background-color 0.3s ease; /* Smooth transition */
+  transition: background-color 0.3s ease;
 }
 
 /* Dark Mode Styling */
 body.dark-mode #marketplaceContainer {
-  background-color: #343a40; /* Dark Mode background */
-  color: white; /* Text color for better visibility */
+  background-color: #343a40;
+  color: white;
 }
 
 .table {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease; /* Smooth transition */
+  transition: background-color 0.3s ease;
 }
 
 body.dark-mode .table {
-  background-color: #454d55; /* Dark Mode table background */
-  color: white; /* Dark Mode text color */
+  background-color: #454d55;
+  color: white;
 }
 
 .table th,
@@ -999,7 +999,7 @@ body.dark-mode .list-unstyled li:hover {
 #taskContainer {
   width: 100%;
   max-width: none;
-  height: 90vh;
+  height: 130vh;
   padding: 30px;
   margin: 0 auto;
   border-radius: 10px;
