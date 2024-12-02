@@ -454,7 +454,7 @@ function backToHome() {
     <div class="card mb-3">
       <div class="card-header d-flex align-items-center">
         <img
-          src="images/Khan.png"
+          src="images/Amir.png"
           alt="User"
           class="rounded-circle me-2"
         />
