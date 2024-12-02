@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const toggleButton = bio.nextElementSibling;
 
     // Truncate the bio initially to two lines
-    const truncatedText = truncateText(fullText, 100); // Adjust character count for your design
+    const truncatedText = truncateText(fullText, 40);
     bio.textContent = truncatedText;
 
     toggleButton.addEventListener("click", function () {
@@ -435,13 +435,15 @@ function navigateTo(event, element) {
     case "slotMachine":
       newsFeed.innerHTML = `
         <div id="slotMachineContainer" class="container-fluid">
-          <h3>🎰 Slot App</h3>
-          <div id="slotResultContainer">
-            <h5 id="slotResult">🍎 | 🍒 | 🍇</h5>
+        <h3>🎰 Slot App</h3>
+        <div id="slotResultContainer">
+         <h5 id="slotResult">🍎 | 🍒 | 🍇</h5>
           </div>
-          <p id="tokenDisplay">Tokens: 10</p>
-          <button id="spinButton" class="btn btn-primary" onclick="spinSlot()">Spin</button>
-        </div>`;
+           <p id="tokenDisplay">Tokens: 10</p>
+         <button id="spinButton" class="btn btn-primary" onclick="spinSlot()">
+          <i class="bi bi-arrow-repeat me-2"></i> Spin
+          </button>
+          </div>`;
       break;
     default:
       newsFeed.innerHTML = `<h3 class="text-center">Page Not Found</h3>`;
