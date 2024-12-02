@@ -1265,9 +1265,13 @@ body.dark-mode #taskList .delete-button:hover {
 }
 
 /* Media Query for screens 346px or less */
-@media (max-width: 346px) {
+@media (max-width: 350px) {
   .navbar .form-control {
     display: none;
+  }
+
+  .navbar-toggler {
+    margin-right: 25px;
   }
 }
 
