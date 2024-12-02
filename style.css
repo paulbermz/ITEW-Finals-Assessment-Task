@@ -401,7 +401,7 @@ body.dark-mode a:hover {
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 10px;
-  background-color: #f8f9fa;
+  background-color: #e9e9e9;
   color: #333333;
 }
 
@@ -481,8 +481,8 @@ body.dark-mode .social-media a:hover {
 }
 
 #newsFeedContainer {
-  height: 100vh; /* Full viewport height */
-  padding-top: 60px; /* Adjust padding to avoid navbar overlap */
+  height: 100vh;
+  padding-top: 60px;
 }
 
 .embed-container {
@@ -491,7 +491,7 @@ body.dark-mode .social-media a:hover {
 
 iframe {
   width: 100%;
-  height: 100%; /* Ensure iframe takes full height */
+  height: 100%;
   display: block;
 }
 
@@ -552,7 +552,7 @@ body.dark-mode .table {
 
 body.dark-mode .table th,
 body.dark-mode .table td {
-  border-color: #555; /* Darker borders for dark mode */
+  border-color: #555;
 }
 
 .table-striped tbody tr:nth-child(odd) {
@@ -560,7 +560,7 @@ body.dark-mode .table td {
 }
 
 body.dark-mode .table-striped tbody tr:nth-child(odd) {
-  background-color: #3e444b; /* Darker striped rows */
+  background-color: #3e444b;
 }
 
 .table-striped tbody tr:hover {
@@ -568,7 +568,7 @@ body.dark-mode .table-striped tbody tr:nth-child(odd) {
 }
 
 body.dark-mode .table-striped tbody tr:hover {
-  background-color: #50585f; /* Darker hover color */
+  background-color: #50585f;
 }
 
 .table th {

@@ -1,254 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const bioElements = document.querySelectorAll(".bio");
-
-  bioElements.forEach((bio) => {
-    const fullText = bio.getAttribute("data-bio");
-    const toggleButton = bio.nextElementSibling;
-
-    // Truncate the bio initially to two lines
-    const truncatedText = truncateText(fullText, 40);
-    bio.textContent = truncatedText;
-
-    toggleButton.addEventListener("click", function () {
-      if (bio.textContent === fullText) {
-        // Collapse to truncated text
-        bio.textContent = truncatedText;
-        toggleButton.textContent = "See More";
-      } else {
-        // Expand to full text
-        bio.textContent = fullText;
-        toggleButton.textContent = "See Less";
-      }
-    });
-  });
-
-  // Helper function to truncate text
-  function truncateText(text, maxLength) {
-    if (text.length > maxLength) {
-      return text.substring(0, maxLength) + "...";
-    }
-    return text;
-  }
-});
-
-document.querySelectorAll(".toggle-bio").forEach((button) => {
-  button.addEventListener("click", function () {
-    const bio = this.previousElementSibling; // Get the bio paragraph
-    bio.classList.toggle("expanded");
-    this.textContent = bio.classList.contains("expanded")
-      ? "See Less"
-      : "See More";
-  });
-});
-
-function navigateToVideoPage(event) {
-  event.preventDefault();
-
-  const newsFeed = document.querySelector("#newsFeedContainer");
-
-  // Array of video URLs
-  const videoUrls = [
-    "https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F817258703396803%2F&show_text=false&width=267&t=0",
-    "https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2805198896324495%2F&show_text=true&width=267&t=0",
-    "https://www.facebook.com/plugins/video.php?height=419&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1024437349422220%2F&show_text=false&width=560&t=0",
-  ];
-
-  // Generate iframe HTML for each video
-  let videoContent = `<h3 class="text-center">🎥 Videos</h3>`;
-
-  videoUrls.forEach((url) => {
-    videoContent += `
-      <div class="embed-container">
-        <iframe src="${url}" 
-                width="100%" 
-                height="100%"
-                style="border: none; overflow: hidden; height: 100vh; width: 100%;"
-                scrolling="no" 
-                frameborder="0" 
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                allowfullscreen="true">
-        </iframe>
-      </div>
-      <br>`;
-  });
-
-  // Insert the video content into the newsFeed container
-  newsFeed.innerHTML = videoContent;
-}
-
-// Function for slot machine spinning logic (for demonstration)
-function spinSlot() {
-  const slots = ["🍎", "🍒", "🍇", "🍊", "🍉", "🍋"];
-  const slotResult = document.getElementById("slotResult");
-
-  slotResult.textContent = "Spinning...";
-
-  setTimeout(function () {
-    const randomSlots = [
-      slots[Math.floor(Math.random() * slots.length)],
-      slots[Math.floor(Math.random() * slots.length)],
-      slots[Math.floor(Math.random() * slots.length)],
-    ];
-
-    slotResult.textContent = randomSlots.join(" | ");
-
-    // Check for a win (if all slots match)
-    if (
-      randomSlots[0] === randomSlots[1] &&
-      randomSlots[1] === randomSlots[2]
-    ) {
-      alert("🎉 Congratulations, you win! 🎉");
-    } else {
-      alert("Try again!");
-    }
-  }, 2000);
-}
-
-// Function to navigate back to the home screen
-function backToHome() {
-  const newsFeed = document.querySelector("#newsFeedContainer");
-
-  newsFeed.innerHTML = `
-    <div class="card mb-3">
-      <div class="card-body">
-        <textarea class="form-control mb-2" placeholder="What's on your mind?"></textarea>
-        <button class="btn btn-primary w-100">Post</button>
-      </div>
-    </div>
-  `;
-}
-
-// Function to restore the original homepage layout
-function backToHome() {
-  const newsFeed = document.querySelector(".col-md-6");
-  history.pushState({ app: "home" }, "", "#home");
-  newsFeed.innerHTML = `
-    <div class="card mb-3">
-     <div id="welcomeQuotes" class="card mb-3">
-      <div class="card-body text-center">
-      <h3 class="mb-3">Welcome to MovieVerse!</h3>
-      <p class="mb-0">
-        "Dive into the magic of cinema and explore the latest hits and timeless classics."
-      </p>
-    </div>
-    </div>
-
-    <!-- Example Post 1 -->
-    <div class="card mb-3">
-      <div class="card-header d-flex align-items-center">
-        <img
-          src="images/Khan.png"
-          alt="User"
-          class="rounded-circle me-2"
-        />
-        <div>
-          <strong>Amir Khan</strong>
-          <br />
-          <small>5 mins ago</small>
-        </div>
-      </div>
-      <div class="card-body">
-        <p>Atlas is a 2024 American science fiction action film starring Jennifer Lopez as a skilled 
-           counterterrorism analyst, who harbors a profound skepticism towards artificial intelligence, 
-           and who comes to realize that it may be her sole recourse following the failure of a mission 
-           aimed at apprehending a rogue robot.</p>
-        <img
-          src="images/atlas.png"
-          alt="Post Content"
-          class="img-fluid rounded"
-        />
-      </div>
-      <div class="card-footer d-flex justify-content-around">
-        <button class="btn btn-outline-primary btn-sm">
-          <i class="bi bi-hand-thumbs-up"></i> React
-        </button>
-        <button class="btn btn-outline-secondary btn-sm">
-          <i class="bi bi-chat"></i> Review
-        </button>
-        <button class="btn btn-outline-success btn-sm">
-          <i class="bi bi-share"></i> Share
-        </button>
-      </div>
-    </div>
-
-    <!-- Example Post 2 -->
-    <div class="card mb-3">
-      <div class="card-header d-flex align-items-center">
-        <img
-          src="images/Ixel.png"
-          alt="User"
-          class="rounded-circle me-2"
-        />
-        <div>
-          <strong>Jane Doe</strong>
-          <br />
-          <small>2 hours ago</small>
-        </div>
-      </div>
-      <div class="card-body">
-        <p>God of Gamblers is a 1989 movie about a legendary gambler who loses his memory but retains his supernatural gambling abilities: 
-           A legendary gambler, Do San, is assigned a bodyguard to help him pay off a debt by beating his friend's card game advisory. However, 
-           Do San has an accident that leaves him with partial memory loss and the mental state of a child. A street hustler, Knife, and his girlfriend 
-           take care of Do San and discover that he still has some of his powers. They take him to the local gambling halls, where he faces off against 
-           Knife's loan-shark and other enemies. </p>
-        <img
-          src="images/gamblers.png"
-          alt="Post Content"
-          class="img-fluid rounded"
-        />
-      </div>
-      <div class="card-footer d-flex justify-content-around">
-        <button class="btn btn-outline-primary btn-sm">
-          <i class="bi bi-hand-thumbs-up"></i> React
-        </button>
-        <button class="btn btn-outline-secondary btn-sm">
-          <i class="bi bi-chat"></i> Review
-        </button>
-        <button class="btn btn-outline-success btn-sm">
-          <i class="bi bi-share"></i> Share
-        </button>
-      </div>
-    </div>
-    <!-- Example Post 3 -->
-    <div class="card mb-3">
-      <div class="card-header d-flex align-items-center">
-        <img
-          src="images/Naes.png"
-          alt="User"
-          class="rounded-circle me-2"
-        />
-        <div>
-          <strong>John Smith</strong>
-          <br />
-          <small>3 hours ago</small>
-        </div>
-      </div>
-      <div class="card-body">
-        <p>Juice is a 1992 American crime drama film about four friends in Harlem, New York City in the early 1990s who are looking for respect and power: 
-           The four friends, Q (Omar Epps), Bishop (Tupac Shakur), Raheem, and Steel, are inseparable and spend their days hanging out, skipping school, and 
-           dealing with police harassment and rival gangs. After an old friend is killed in a shootout, Bishop tells the group that they have no respect, or "juice". 
-           To get some, they rob a corner store, but things take an unexpected turn. </p>
-        <img
-          src="images/juice.png"
-          alt="Post Content"
-          class="img-fluid rounded"
-        />
-      </div>
-      <div class="card-footer d-flex justify-content-around">
-        <button class="btn btn-outline-primary btn-sm">
-          <i class="bi bi-hand-thumbs-up"></i> React
-        </button>
-        <button class="btn btn-outline-secondary btn-sm">
-          <i class="bi bi-chat"></i> Review
-        </button>
-        <button class="btn btn-outline-success btn-sm">
-          <i class="bi bi-share"></i> Share
-        </button>
-      </div>
-    </div>
-  `;
-}
-
 function navigateTo(event, element) {
   event.preventDefault();
 
@@ -450,6 +199,84 @@ function navigateTo(event, element) {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const bioElements = document.querySelectorAll(".bio");
+
+  bioElements.forEach((bio) => {
+    const fullText = bio.getAttribute("data-bio");
+    const toggleButton = bio.nextElementSibling;
+
+    // Truncate the bio initially to two lines
+    const truncatedText = truncateText(fullText, 40);
+    bio.textContent = truncatedText;
+
+    toggleButton.addEventListener("click", function () {
+      if (bio.textContent === fullText) {
+        // Collapse to truncated text
+        bio.textContent = truncatedText;
+        toggleButton.textContent = "See More";
+      } else {
+        // Expand to full text
+        bio.textContent = fullText;
+        toggleButton.textContent = "See Less";
+      }
+    });
+  });
+
+  // Helper function to truncate text
+  function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  }
+});
+
+document.querySelectorAll(".toggle-bio").forEach((button) => {
+  button.addEventListener("click", function () {
+    const bio = this.previousElementSibling; // Get the bio paragraph
+    bio.classList.toggle("expanded");
+    this.textContent = bio.classList.contains("expanded")
+      ? "See Less"
+      : "See More";
+  });
+});
+
+function navigateToVideoPage(event) {
+  event.preventDefault();
+
+  const newsFeed = document.querySelector("#newsFeedContainer");
+
+  // Array of video URLs
+  const videoUrls = [
+    "https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F817258703396803%2F&show_text=false&width=267&t=0",
+    "https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2805198896324495%2F&show_text=true&width=267&t=0",
+    "https://www.facebook.com/plugins/video.php?height=419&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1024437349422220%2F&show_text=false&width=560&t=0",
+  ];
+
+  // Generate iframe HTML for each video
+  let videoContent = `<h3 class="text-center">🎥 Videos</h3>`;
+
+  videoUrls.forEach((url) => {
+    videoContent += `
+      <div class="embed-container">
+        <iframe src="${url}" 
+                width="100%" 
+                height="100%"
+                style="border: none; overflow: hidden; height: 100vh; width: 100%;"
+                scrolling="no" 
+                frameborder="0" 
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                allowfullscreen="true">
+        </iframe>
+      </div>
+      <br>`;
+  });
+
+  // Insert the video content into the newsFeed container
+  newsFeed.innerHTML = videoContent;
+}
+
 // To-Do List initialization to load tasks
 function initializeToDoList() {
   const taskList = document.getElementById("taskList");
@@ -566,6 +393,214 @@ function deleteAllTasks() {
 // Initialize the to-do list on page load
 window.onload = initializeToDoList;
 
+// Function for slot machine spinning logic (for demonstration)
+function spinSlot() {
+  const slots = ["🍎", "🍒", "🍇", "🍊", "🍉", "🍋"];
+  const slotResult = document.getElementById("slotResult");
+
+  slotResult.textContent = "Spinning...";
+
+  setTimeout(function () {
+    const randomSlots = [
+      slots[Math.floor(Math.random() * slots.length)],
+      slots[Math.floor(Math.random() * slots.length)],
+      slots[Math.floor(Math.random() * slots.length)],
+    ];
+
+    slotResult.textContent = randomSlots.join(" | ");
+
+    // Check for a win (if all slots match)
+    if (
+      randomSlots[0] === randomSlots[1] &&
+      randomSlots[1] === randomSlots[2]
+    ) {
+      alert("🎉 Congratulations, you win! 🎉");
+    } else {
+      alert("Try again!");
+    }
+  }, 2000);
+}
+
+// Function to navigate back to the home screen
+function backToHome() {
+  const newsFeed = document.querySelector("#newsFeedContainer");
+
+  newsFeed.innerHTML = `
+    <div class="card mb-3">
+      <div class="card-body">
+        <textarea class="form-control mb-2" placeholder="What's on your mind?"></textarea>
+        <button class="btn btn-primary w-100">Post</button>
+      </div>
+    </div>
+  `;
+}
+
+// Function to restore the original homepage layout
+function backToHome() {
+  const newsFeed = document.querySelector(".col-md-6");
+  history.pushState({ app: "home" }, "", "#home");
+  newsFeed.innerHTML = `
+    <div class="card mb-3">
+     <div id="welcomeQuotes" class="card mb-3">
+      <div class="card-body text-center">
+      <h3 class="mb-3">Welcome to MovieVerse!</h3>
+      <p class="mb-0">
+        "Dive into the magic of cinema and explore the latest hits and timeless classics."
+      </p>
+    </div>
+    </div>
+
+    <!-- Example Post 1 -->
+    <div class="card mb-3">
+      <div class="card-header d-flex align-items-center">
+        <img
+          src="images/Khan.png"
+          alt="User"
+          class="rounded-circle me-2"
+        />
+        <div>
+          <strong>Amir Khan</strong>
+          <br />
+          <small>5 mins ago</small>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Atlas is a 2024 American science fiction action film starring Jennifer Lopez as a skilled 
+           counterterrorism analyst, who harbors a profound skepticism towards artificial intelligence, 
+           and who comes to realize that it may be her sole recourse following the failure of a mission 
+           aimed at apprehending a rogue robot.</p>
+        <img
+          src="images/atlas.png"
+          alt="Post Content"
+          class="img-fluid rounded"
+        />
+      </div>
+      <div class="card-footer d-flex justify-content-around">
+        <button class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-hand-thumbs-up"></i> React
+        </button>
+        <button class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-chat"></i> Review
+        </button>
+        <button class="btn btn-outline-success btn-sm">
+          <i class="bi bi-share"></i> Share
+        </button>
+      </div>
+    </div>
+
+    <!-- Example Post 2 -->
+    <div class="card mb-3">
+      <div class="card-header d-flex align-items-center">
+        <img
+          src="images/Ixel.png"
+          alt="User"
+          class="rounded-circle me-2"
+        />
+        <div>
+          <strong>Jane Doe</strong>
+          <br />
+          <small>2 hours ago</small>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>God of Gamblers is a 1989 movie about a legendary gambler who loses his memory but retains his supernatural gambling abilities: 
+           A legendary gambler, Do San, is assigned a bodyguard to help him pay off a debt by beating his friend's card game advisory. However, 
+           Do San has an accident that leaves him with partial memory loss and the mental state of a child. A street hustler, Knife, and his girlfriend 
+           take care of Do San and discover that he still has some of his powers. They take him to the local gambling halls, where he faces off against 
+           Knife's loan-shark and other enemies. </p>
+        <img
+          src="images/gamblers.png"
+          alt="Post Content"
+          class="img-fluid rounded"
+        />
+      </div>
+      <div class="card-footer d-flex justify-content-around">
+        <button class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-hand-thumbs-up"></i> React
+        </button>
+        <button class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-chat"></i> Review
+        </button>
+        <button class="btn btn-outline-success btn-sm">
+          <i class="bi bi-share"></i> Share
+        </button>
+      </div>
+    </div>
+    <!-- Example Post 3 -->
+    <div class="card mb-3">
+      <div class="card-header d-flex align-items-center">
+        <img
+          src="images/Naes.png"
+          alt="User"
+          class="rounded-circle me-2"
+        />
+        <div>
+          <strong>John Smith</strong>
+          <br />
+          <small>3 hours ago</small>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Juice is a 1992 American crime drama film about four friends in Harlem, New York City in the early 1990s who are looking for respect and power: 
+           The four friends, Q (Omar Epps), Bishop (Tupac Shakur), Raheem, and Steel, are inseparable and spend their days hanging out, skipping school, and 
+           dealing with police harassment and rival gangs. After an old friend is killed in a shootout, Bishop tells the group that they have no respect, or "juice". 
+           To get some, they rob a corner store, but things take an unexpected turn. </p>
+        <img
+          src="images/juice.png"
+          alt="Post Content"
+          class="img-fluid rounded"
+        />
+      </div>
+      <div class="card-footer d-flex justify-content-around">
+        <button class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-hand-thumbs-up"></i> React
+        </button>
+        <button class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-chat"></i> Review
+        </button>
+        <button class="btn btn-outline-success btn-sm">
+          <i class="bi bi-share"></i> Share
+        </button>
+      </div>
+    </div>
+     <div class="card mb-3">
+      <div class="card-header d-flex align-items-center">
+        <img
+          src="images/Jarad.png" 
+          alt="User"
+          class="rounded-circle me-2"
+        />
+        <div>
+          <strong>Jarad Higgins</strong>
+          <br />
+          <small>6 hours ago</small>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Gladiator II is a 2024 movie directed by Ridley Scott that continues the story of vengeance, power, and intrigue in Ancient Rome: 
+           Lucius Verus Aurelius, the grandson of Marcus Aurelius, is forced to enter the Colosseum after his home is conquered by the tyrannical 
+           emperors Geta and Caracalla. Lucius must use his past to find the strength and honor to return Rome to its glory.  </p>
+        <img
+          src="images/gladiator.png"
+          alt="Post Content"
+          class="img-fluid rounded"
+        />
+      </div>
+      <div class="card-footer d-flex justify-content-around">
+        <button class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-hand-thumbs-up"></i> React
+        </button>
+        <button class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-chat"></i> Review
+        </button>
+        <button class="btn btn-outline-success btn-sm">
+          <i class="bi bi-share"></i> Share
+        </button>
+      </div>
+    </div>
+  `;
+}
+
 let tokens = 10;
 
 // Function to update the token display
@@ -651,7 +686,7 @@ function showEmojiRain() {
 
     setTimeout(() => {
       emoji.remove();
-    }, 3000);
+    }, 5000);
   }
 
   setTimeout(() => {
