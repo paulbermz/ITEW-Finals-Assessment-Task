@@ -340,6 +340,7 @@ function addTaskToDOM(taskText, completed = false) {
   taskItem.className =
     "list-group-item d-flex justify-content-between align-items-center";
 
+  // Checkbox for completion
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.checked = completed;
@@ -348,9 +349,10 @@ function addTaskToDOM(taskText, completed = false) {
     taskTextElement.style.textDecoration = checkbox.checked
       ? "line-through"
       : "none";
-    saveTasks(); // Save updated tasks
+    saveTasks();
   };
 
+  // Task text
   const taskTextElement = document.createElement("span");
   taskTextElement.className = "task-text";
   taskTextElement.textContent = taskText;
@@ -358,19 +360,37 @@ function addTaskToDOM(taskText, completed = false) {
     taskTextElement.style.textDecoration = "line-through";
   }
 
+  // Edit button
+  const editButton = document.createElement("button");
+  editButton.className = "btn btn-warning btn-sm me-2";
+  editButton.innerHTML = '<i class="bi bi-pencil"></i>'; // Pencil icon
+  editButton.onclick = () => {
+    const newText = prompt("Edit your task:", taskTextElement.textContent);
+    if (newText !== null && newText.trim() !== "") {
+      taskTextElement.textContent = newText.trim();
+      saveTasks(); // Save the edited tasks
+    }
+  };
+
+  // Delete button
   const deleteButton = document.createElement("button");
   deleteButton.className = "btn btn-danger btn-sm";
-  deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+  deleteButton.innerHTML = '<i class="bi bi-trash"></i>'; // Trash icon
   deleteButton.onclick = () => {
     taskList.removeChild(taskItem);
     saveTasks();
   };
 
+  // Append elements to the task item
   taskItem.appendChild(checkbox);
   taskItem.appendChild(taskTextElement);
+  taskItem.appendChild(editButton);
   taskItem.appendChild(deleteButton);
+
+  // Append the task item to the list
   taskList.appendChild(taskItem);
 
+  // Hide empty message when a task is added
   emptyMessage.style.display = "none";
 }
 
