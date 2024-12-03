@@ -1054,7 +1054,7 @@ body.light-mode #taskInput:focus {
 
 /* Dark Mode Input */
 body.dark-mode #taskInput {
-  background-color: #3a3b3c;
+  background-color: #3c3a3a;
   color: #e4e6eb;
   border: 1px solid #555;
 }
@@ -1136,7 +1136,7 @@ body.light-mode #taskList li:hover {
 
 /* Dark Mode Task List */
 body.dark-mode #taskList li {
-  background-color: #3a3b3c;
+  background-color: #3c3a3a;
   color: #e4e6eb;
 }
 

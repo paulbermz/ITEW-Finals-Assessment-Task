@@ -470,7 +470,7 @@ function backToHome() {
     </div>
     </div>
 
-    <!-- Example Post 1 -->
+    <!-- Atlas -->
     <div class="card mb-3">
       <div class="card-header d-flex align-items-center">
         <img
@@ -508,7 +508,7 @@ function backToHome() {
       </div>
     </div>
 
-    <!-- Example Post 2 -->
+    <!-- God of Gamblers -->
     <div class="card mb-3">
       <div class="card-header d-flex align-items-center">
         <img
@@ -546,7 +546,7 @@ function backToHome() {
         </button>
       </div>
     </div>
-    <!-- Example Post 3 -->
+    <!-- Juice -->
     <div class="card mb-3">
       <div class="card-header d-flex align-items-center">
         <img
