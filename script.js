@@ -550,12 +550,12 @@ function backToHome() {
     <div class="card mb-3">
       <div class="card-header d-flex align-items-center">
         <img
-          src="images/Naes.png"
+          src="images/Jarad.png"
           alt="User"
           class="rounded-circle me-2"
         />
         <div>
-          <strong>John Smith</strong>
+          <strong>Jarad Anthony Higgins</strong>
           <br />
           <small>3 hours ago</small>
         </div>
@@ -586,12 +586,12 @@ function backToHome() {
      <div class="card mb-3">
       <div class="card-header d-flex align-items-center">
         <img
-          src="images/Jarad.png" 
+          src="images/Naes.png" 
           alt="User"
           class="rounded-circle me-2"
         />
         <div>
-          <strong>Jarad Higgins</strong>
+          <strong>John Smith</strong>
           <br />
           <small>6 hours ago</small>
         </div>
