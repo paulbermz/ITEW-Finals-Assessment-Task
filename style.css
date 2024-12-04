@@ -925,6 +925,66 @@ body.dark-mode .list-unstyled li:hover {
   transform: rotate(180deg);
 }
 
+/* General Styles for the Countdown */
+#countdown {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(
+    45deg,
+    #ff6a00,
+    #ffcc00
+  ); /* Gradient background */
+  border: 3px solid #ffcc00; /* Border color */
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  animation: countdownAnimation 3s ease-out forwards; /* Apply keyframes */
+  display: none; /* Initially hidden */
+}
+
+/* Keyframe Animation for Countdown Text */
+@keyframes countdownAnimation {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Styling for the countdown number */
+#countdownTimer {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ff4d00;
+  padding: 5px 10px;
+  border-radius: 5px;
+  animation: countdownColorChange 1s ease-in-out infinite alternate;
+}
+
+/* Keyframe Animation for Countdown Timer Color Change */
+@keyframes countdownColorChange {
+  0% {
+    background-color: #ff4d00;
+  }
+  50% {
+    background-color: #ffcc00;
+  }
+  100% {
+    background-color: #ff4d00;
+  }
+}
+
 /* Back Button Container */
 #backButton {
   text-align: center;
@@ -1019,16 +1079,21 @@ body.dark-mode #taskContainer {
   color: #e4e6eb;
 }
 
-/* Input Field */
+/* Textarea Field */
 #taskInput {
   background-color: #f0f0f0;
   color: #333;
   border: none;
-  border-radius: 50px;
+  border-radius: 10px;
   padding: 15px 20px;
   width: 100%;
   font-size: 16px;
   transition: all 0.3s ease;
+  resize: none;
+  line-height: 1.5;
+  min-height: 50px;
+  max-height: 150px;
+  overflow-y: auto;
 }
 
 #taskInput::placeholder {
@@ -1328,5 +1393,572 @@ body.dark-mode #taskList .delete-button:hover {
 
   .social-media a {
     font-size: 1.2rem;
+  }
+}
+
+/* Full-Screen Overlay */
+#fullScreenContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  overflow-y: auto;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.close-button:hover {
+  color: #f00;
+}
+
+/* STYLES */
+
+@import url(styles/buttons.css);
+@import url(styles/header.css);
+@import url(styles/nav.css);
+@import url(styles/main.css);
+@import url(styles/footer.css);
+
+:root {
+  --black-background: rgb(20, 20, 20);
+  --gray: #808080;
+  --white: white;
+  --white-btn-hover: rgba(255, 255, 255, 0.777);
+  --black-btn: rgba(0, 0, 0, 0.382);
+  --black-btn-hover: rgba(0, 0, 0, 0.8);
+  --gray-btn: rgba(120, 120, 120, 0.6);
+  --gray-btn-hover: rgba(109, 109, 110, 0.525);
+}
+
+body {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--white);
+  background-color: var(--black-background);
+}
+
+.background {
+  height: 50rem;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(20, 20, 20, 0.9) 5%,
+      rgba(20, 20, 20, 0.2) 20%,
+      rgba(20, 20, 20, 0.2) 80%,
+      rgba(20, 20, 20, 0.8) 100%
+    ),
+    url(https://raw.githubusercontent.com/debschaan/netflix-clone/37669424c8c0173f10c1f3cd619d49d21e2bfb6b/assets/img/banner%201.svg);
+  background-size: cover;
+}
+
+.visually-hidden {
+  clip: rect(1px 1px 1px 1px) !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
+
+/* NAVIGATION */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: background-color 0.5s ease;
+}
+
+.scrolled {
+  background-color: var(--black-background);
+  z-index: 2;
+}
+
+/* PRIMARY NAVIGATION */
+
+.primary-menu--logo {
+  background-image: url(https://raw.githubusercontent.com/debschaan/netflix-clone/37669424c8c0173f10c1f3cd619d49d21e2bfb6b/assets/img/Vector__3_.svg);
+  background-repeat: no-repeat;
+  width: 7rem;
+  height: 2rem;
+  background-size: contain;
+  cursor: pointer;
+  position: relative;
+  left: 4rem;
+}
+
+.primary-menu--list {
+  display: flex;
+  gap: 2rem;
+  position: absolute;
+  left: 13rem;
+}
+
+.primary-menu--item a {
+  color: var(--white);
+  font-weight: 400;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.primary-menu--item a:hover {
+  color: var(--gray);
+}
+
+/* SECONDARY NAVIGATION */
+
+.secondary-menu--list {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  right: 4rem;
+}
+
+.secondary-menu--item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.secondary-menu--item a {
+  color: white;
+  font-size: 1.3rem;
+}
+
+.secondary-menu--user-icon {
+  background-image: url("https://github.com/debschaan/netflix-clone/blob/main/assets/img/user%201.png?raw=true");
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+}
+
+/* HERO SECTION */
+
+.hero {
+  padding: 4rem;
+}
+
+.hero--logo {
+  width: 40rem;
+  margin-bottom: 1rem;
+}
+
+.hero--description {
+  width: 40rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* MAIN SECTION */
+
+main {
+  padding: 0 4rem;
+}
+
+.section__category {
+  margin-bottom: 2rem;
+}
+
+.category--title {
+  margin-bottom: 1rem;
+  position: absolute;
+}
+
+.category--title a {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.category--title a:hover {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.category--carousel {
+  display: flex;
+  align-items: center;
+  margin: -2rem 0;
+}
+
+.carousel--list {
+  overflow: scroll;
+  white-space: nowrap;
+  display: inline-flex;
+  width: 82rem;
+  padding: 3rem 0;
+  margin: 0 -3rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  list-style: none;
+}
+
+.carousel--list::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel--item {
+  display: inline-block;
+  text-align: center;
+  margin-right: 0.3rem;
+  transition: 0.2s;
+}
+
+.carousel--item img {
+  width: 15rem;
+  border-radius: 0.2rem;
+}
+
+.carousel--item:hover {
+  transform: scale(1.4);
+  position: relative;
+  border-radius: 0.4rem;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 5rem 14.5rem 1rem;
+  flex-direction: column;
+}
+
+.footer-copyright span {
+  color: var(--gray);
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+/* SOCIAL */
+
+.social--list {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.social--item i {
+  font-size: 1.3rem;
+  color: var(--white);
+}
+
+/* OPTIONS */
+
+.options--list {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.options--item a {
+  display: list-item;
+  margin-bottom: 0.9rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+  color: var(--gray);
+  text-decoration: none;
+  width: 15rem;
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.options--item a:hover {
+  text-decoration: underline;
+}
+
+/* BUTTONS */
+
+.hero--button {
+  font-weight: 700;
+  border: none;
+  padding: 1.1rem 2.2rem;
+  border-radius: 0.3rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.hero--button i {
+  margin-right: 0.5rem;
+}
+
+.play {
+  background-color: var(--white);
+  color: var(--black-background);
+}
+
+.play:hover {
+  background-color: var(--white-btn-hover);
+}
+
+.info {
+  background-color: var(--gray-btn);
+  color: var(--white);
+}
+
+.info:hover {
+  background-color: var(--gray-btn-hover);
+}
+
+.carousel-button {
+  cursor: pointer;
+  font-size: 2rem;
+  z-index: 1;
+  padding: 3.3rem 1rem;
+  border-radius: 0.2rem;
+  background-color: var(--black-btn);
+  transition: all 0.1s;
+}
+
+.carousel-button b {
+  color: var(--white);
+  transition: all 0.1s;
+  opacity: 0.7;
+}
+
+.carousel-button b:hover {
+  transform: scale(1.25);
+  transform-origin: center;
+  opacity: 1;
+}
+
+.carousel-button:hover {
+  background-color: var(--black-btn-hover);
+}
+
+.service-code-button {
+  padding: 0.4rem 0.4rem;
+  background-color: transparent;
+  color: var(--gray);
+  border: solid 0.09rem var(--gray);
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.service-code-button:hover {
+  color: var(--white);
+  cursor: pointer;
+}
+
+/* General Media Queries */
+@media (max-width: 1200px) {
+  /* Adjust container padding for smaller screens */
+  main {
+    padding: 0 2rem;
+  }
+  footer {
+    padding: 4rem 10rem 1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  /* Adjust hero section for medium screens */
+  .hero {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .hero--logo {
+    width: 30rem;
+  }
+
+  .hero--description {
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero--button {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .category--carousel {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Adjust navigation for tablet screens */
+  nav {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .primary-menu--list {
+    left: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .secondary-menu--list {
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  /* Adjust carousel for smaller screens */
+  .carousel--list {
+    width: 100%;
+    padding: 1rem 0;
+    margin: 0;
+  }
+
+  .carousel--item img {
+    width: 12rem;
+  }
+
+  footer {
+    padding: 3rem 4rem 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Adjust logo and menu items */
+  .primary-menu--logo {
+    left: 1rem;
+    width: 5rem;
+  }
+
+  .primary-menu--list {
+    left: 1rem;
+    gap: 0.5rem;
+  }
+
+  .hero {
+    padding: 1rem;
+  }
+
+  .hero--logo {
+    width: 25rem;
+  }
+
+  .hero--description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero--button {
+    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  /* Adjust carousel buttons */
+  .carousel-button {
+    font-size: 1.5rem;
+    padding: 2rem 0.5rem;
+  }
+
+  /* Footer adjustments */
+  footer {
+    padding: 2rem 2rem 1rem;
+  }
+
+  .options--list {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .options--item a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  /* Stack navigation items */
+  nav {
+    text-align: center;
+  }
+
+  .primary-menu--list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .secondary-menu--list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero--logo {
+    width: 20rem;
+  }
+
+  .hero--description {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero--button {
+    font-size: 0.8rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  /* Carousel adjustments for small screens */
+  .carousel--item img {
+    width: 10rem;
+  }
+
+  .carousel-button {
+    font-size: 1rem;
+    padding: 1.5rem 0.3rem;
+  }
+}
+
+@media (max-width: 350px) {
+  /* Simplify UI for extra small screens */
+  nav {
+    padding: 0.5rem;
+  }
+
+  .primary-menu--logo {
+    width: 4rem;
+  }
+
+  .hero--logo {
+    width: 15rem;
+  }
+
+  .hero--description {
+    font-size: 0.7rem;
+  }
+
+  .hero--button {
+    font-size: 0.7rem;
+    padding: 0.5rem 1rem;
+  }
+
+  footer {
+    padding: 1rem;
+  }
+
+  .options--list {
+    gap: 0.5rem;
   }
 }

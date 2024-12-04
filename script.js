@@ -152,12 +152,12 @@ function navigateTo(event, element) {
         <div id="taskContainer" class="card-body">
       <h3 class="text-center">📝 To-Do List App</h3>
        <div>
-        <input
+        <textarea
          type="text"
          id="taskInput"
          class="form-control mb-2"
          placeholder="Enter a new task"
-       />
+       ></textarea>
       <button
       id="addTaskButton"
       class="btn btn-primary w-100 mb-3"
@@ -183,16 +183,19 @@ function navigateTo(event, element) {
       break;
     case "slotMachine":
       newsFeed.innerHTML = `
-        <div id="slotMachineContainer" class="container-fluid">
-        <h3>🎰 Slot App</h3>
-        <div id="slotResultContainer">
-         <h5 id="slotResult">🍎 | 🍒 | 🍇</h5>
-          </div>
-           <p id="tokenDisplay">Tokens: 10</p>
-         <button id="spinButton" class="btn btn-primary" onclick="spinSlot()">
-          <i class="bi bi-arrow-repeat me-2"></i> Spin
-          </button>
-          </div>`;
+       <div id="slotMachineContainer" class="container-fluid">
+       <h3>🎰 Slot App</h3>
+       <div id="slotResultContainer">
+       <h5 id="slotResult">🍎 | 🍒 | 🍇</h5>
+       </div>
+       <p id="tokenDisplay">Tokens: 10</p>
+       <button id="spinButton" class="btn btn-primary" onclick="spinSlot()">
+       <i class="bi bi-arrow-repeat me-2"></i> Spin
+       </button>
+       <p id="countdown" style="display: none;">
+       Tokens will be restored in <span id="countdownTimer">3</span> seconds.
+       </p>
+    </div>`;
       break;
     default:
       newsFeed.innerHTML = `<h3 class="text-center">Page Not Found</h3>`;
@@ -245,37 +248,181 @@ document.querySelectorAll(".toggle-bio").forEach((button) => {
 function navigateToVideoPage(event) {
   event.preventDefault();
 
-  const newsFeed = document.querySelector("#newsFeedContainer");
+  // Check if a full-screen container already exists
+  const existingContainer = document.querySelector("#fullScreenContainer");
+  if (existingContainer) {
+    // If the user clicks a different nav link, remove the existing container
+    document.body.removeChild(existingContainer);
+    return;
+  }
 
-  // Array of video URLs
-  const videoUrls = [
-    "https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F817258703396803%2F&show_text=false&width=267&t=0",
-    "https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2805198896324495%2F&show_text=true&width=267&t=0",
-    "https://www.facebook.com/plugins/video.php?height=419&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1024437349422220%2F&show_text=false&width=560&t=0",
-  ];
+  // Create a full-screen container dynamically
+  const fullScreenContainer = document.createElement("div");
+  fullScreenContainer.id = "fullScreenContainer";
+  fullScreenContainer.innerHTML = `
+    <div class="background">
+        <header>
+                <ul class="secondary-menu--list">
+                    <li class="secondary-menu--item"><a href="#"><i class="fa-solid fa-search"></i></a></li>
+                    <li class="secondary-menu--item"><a href="#"><i class="fa-solid fa-bell"></i></a></li>
+                    <li class="secondary-menu--item user">
+                        <span class="secondary-menu--user-icon" data-user="User's icon"><a href="#"></a></span>
+                        <a href="#"><i class="fa-solid fa-caret-down"></i></a>
+                    </li>
+                </ul>
+            </nav>
+            <div role="banner" class="hero">
+                <img class="hero--logo" src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/poster%201.png?raw=true" alt="Movie title logo">
+                <p class="hero--description">In a state-of-the-art penitentiary, an inmate participates in an experiment with drugs that control emotions for a pharmaceutical genius.</p>
+                <button class="hero--button play"><i class="fa-solid fa-play"></i>Watch</button>
+                <button class="hero--button info"><i class="fa-solid fa-circle-info"></i>More information</button>
+            </div>
+        </header>
 
-  // Generate iframe HTML for each video
-  let videoContent = `<h3 class="text-center">🎥 Videos</h3>`;
+        <main>
+            <h1 class="visually-hidden">Homepage Netflix</h1>
 
-  videoUrls.forEach((url) => {
-    videoContent += `
-      <div class="embed-container">
-        <iframe src="${url}" 
-                width="100%" 
-                height="100%"
-                style="border: none; overflow: hidden; height: 100vh; width: 100%;"
-                scrolling="no" 
-                frameborder="0" 
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                allowfullscreen="true">
-        </iframe>
-      </div>
-      <br>`;
+            <section class="section__category">
+                <h3 class="category--title"><a href="#">My list</a></h3>
+                <div class="category--carousel">
+                    <span class="carousel-button prev" role="button" aria-label="See before titles"><b class="fa-solid fa-chevron-left"></b></span>
+                    <div class="carousel__container">
+                        <ul class="carousel--list">
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/minhalista_1.png?raw=true" alt="Bojack Horseman"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/minhalista_2.png?raw=true" alt="Ozark"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/minhalista_3.png?raw=true" alt="A Vizinha da Mulher na Janela"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/minhalista_4.png?raw=true" alt="Breaking Bad"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/minhalista_5.png?raw=true" alt="The End of the F***ing World"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/minhalista_6.png?raw=true" alt="Russian Doll"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/minhalista_7.png?raw=true" alt="Pray Away"></a></li>
+                        </ul>
+                    </div>
+                    <span class="carousel-button next" role="button" aria-label="See more titles"><b class="fa-solid fa-chevron-right"></b></span>
+                </div>
+            </section>
+
+            <section class="section__category">
+                <h3 class="category--title"><a href="#">Trending</a></h3>
+                <div class="category--carousel">
+                    <span class="carousel-button prev" role="button" aria-label="See previous titles"><b class="fa-solid fa-chevron-left"></b></span>
+                    <div class="carousel__container">
+                        <ul class="carousel--list">
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/top_1.png?raw=true" alt="Stranger Things"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/top_2.png?raw=true" alt="The Umbrella Academy"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/top_3.png?raw=true" alt="Arremessando Alto"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/top_4.png?raw=true" alt="Amor & Gelato"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/top_5.png?raw=true" alt="Peaky Blinders"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/top_6.png?raw=true" alt="La Casa de Papel - Coreia"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/top_7.png?raw=true" alt="Polar"></a></li>
+                        </ul>
+                    </div>
+                    <span class="carousel-button next" role="button" aria-label="See more titles"><b class="fa-solid fa-chevron-right"></b></span>
+                </div>
+            </section>
+
+            <section class="section__category">
+                <h3 class="category--title"><a href="#">Foreign series</a></h3>
+                <div class="category--carousel">
+                    <span class="carousel-button prev" role="button" aria-label="See previous titles"><b class="fa-solid fa-chevron-left"></b></span>
+                    <div class="carousel__container">
+                        <ul class="carousel--list">
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/estrangeiras_1.png?raw=true" alt="Queen Loreta"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/estrangeiras_2.png?raw=true" alt="As 7 Vidas de Lea"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/estrangeiras_3.png?raw=true" alt="Young Royals"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/estrangeiras_4.png?raw=true" alt="Dark"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/estrangeiras_5.png?raw=true" alt="Bem-vindos ao Eden"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/estrangeiras_6.png?raw=true" alt="Ozark"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/estrangeiras_7.png?raw=true" alt="Elize Matsunga"></a></li>
+                        </ul>
+                    </div>
+                    <span class="carousel-button next" role="button" aria-label="See more titles"><b class="fa-solid fa-chevron-right"></b></span>
+                </div>
+            </section>
+
+            <section class="section__category">
+                <h3 class="category--title"><a href="#">Eccentric acid humor series</a></h3>
+                <div class="category--carousel">
+                    <span class="carousel-button prev" role="button" aria-label="See previous titles"><b class="fa-solid fa-chevron-left"></b></span>
+                    <div class="carousel__container">
+                        <ul class="carousel--list">
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/excentricas_1.png?raw=true" alt="Fyre"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/excentricas_2.png?raw=true" alt="Friends from College"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/excentricas_3.png?raw=true" alt="Riverdale"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/excentricas_4.png?raw=true" alt="Velvet Buzzsaw"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/excentricas_5.png?raw=true" alt="Amazing Interiors"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/excentricas_6.png?raw=true" alt="The Good Place"></a></li>
+                            <li class="carousel--item"><a href="#"><img src="https://github.com/debschaan/netflix-clone/blob/main/assets/img/excentricas_7.png?raw=true" alt="Unbreakable Kimmy Schmidt"></a></li>
+                        </ul>
+                    </div>
+                    <span class="carousel-button next" role="button" aria-label="See more titles"><b class="fa-solid fa-chevron-right"></b></span>
+                </div>
+            </section>
+        </main>
+        <footer role="contentinfo">
+            <ul class="social--list">
+                <li class="social--item"><a aria-label="facebook" href="#"><i class="bi bi-facebook"></i></a></li>
+                <li class="social--item"><a aria-label="instagram" href="#"><i class="bi bi-instagram"></i></a></li>
+                <li class="social--item"><a aria-label="twitter" href="#"><i class="bi bi-twitter"></i></a></li>
+                <li class="social--item"><a aria-label="youtube" href="#"><i class="bi bi-youtube"></i></a></li>
+            </ul>
+            <div class="options">
+                <ul class="options--list">
+                    <li class="options--item"><a href="#">Audiodescription</a></li>
+                    <li class="options--item"><a href="#">Investor relations</a></li>
+                    <li class="options--item"><a href="#">Legal information</a></li>
+                    <li class="options--item"><a href="#">Help Center</a></li>
+                    <li class="options--item"><a href="#">Recruitment</a></li>
+                    <li class="options--item"><a href="#">Cookie preferences</a></li>
+                    <li class="options--item"><a href="#">Gift Cards</a></li>
+                    <li class="options--item"><a href="#">Terms of Use</a></li>
+                    <li class="options--item"><a href="#">Legal Notice</a></li>
+                    <li class="options--item"><a href="#">Press</a></li>
+                    <li class="options--item"><a href="#">Confidentiality</a></li>
+                    <li class="options--item"><a href="#">Contacts</a></li>
+                    <li class="options--item"><a href="#">Informations</a></li>
+                </ul>
+            </div>
+            <button class="service-code-button">Service Code</button>
+            <div class="footer-copyright"><span>© 2024 Débora Schaan.</span></div>
+        </footer>
+    </div>`;
+
+  // Add the full-screen container to the body
+  document.body.appendChild(fullScreenContainer);
+
+  // Add event listener to close the full-screen overlay
+  document
+    .getElementById("closeFullscreen")
+    .addEventListener("click", closeFullscreen);
+
+  // Close the full screen when another navigation link is clicked
+  const navLinks = document.querySelectorAll(".primary-menu--item a");
+  navLinks.forEach((link) => {
+    link.addEventListener("click", closeFullscreen);
   });
 
-  // Insert the video content into the newsFeed container
-  newsFeed.innerHTML = videoContent;
+  function closeFullscreen() {
+    // Remove the full-screen container
+    const fullScreen = document.querySelector("#fullScreenContainer");
+    if (fullScreen) {
+      document.body.removeChild(fullScreen);
+    }
+  }
 }
+
+// Add event listeners to navigation links
+document.querySelectorAll(".primary-menu--item a").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (link.textContent === "Videos") {
+      navigateToVideoPage(event);
+    } else {
+      const fullScreen = document.querySelector("#fullScreenContainer");
+      if (fullScreen) {
+        fullScreen.remove();
+      }
+    }
+  });
+});
 
 // To-Do List initialization to load tasks
 function initializeToDoList() {
@@ -622,6 +769,8 @@ function backToHome() {
 }
 
 let tokens = 10;
+let isCooldown = false; // Track whether the cooldown is active
+let countdownTimerInterval;
 
 // Function to update the token display
 function updateTokenDisplay() {
@@ -629,13 +778,53 @@ function updateTokenDisplay() {
   tokenDisplay.textContent = `Tokens: ${tokens}`;
 }
 
+// Function to restore tokens after cooldown and show countdown
+function restoreTokens() {
+  const slotResult = document.getElementById("slotResult");
+  const spinButton = document.getElementById("spinButton");
+  const countdown = document.getElementById("countdown");
+  const countdownTimer = document.getElementById("countdownTimer");
+
+  // Show cooldown message and countdown
+  slotResult.textContent = "No tokens left. Restoring tokens... Please wait.";
+  countdown.style.display = "block"; // Show the countdown text
+  let timeLeft = 5;
+  countdownTimer.textContent = timeLeft; // Set the initial countdown value
+
+  // Disable the Spin button during cooldown
+  spinButton.disabled = true;
+
+  // Start the countdown interval
+  countdownTimerInterval = setInterval(() => {
+    timeLeft--;
+    countdownTimer.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(countdownTimerInterval);
+      tokens = 10; // Restore tokens to 10
+      updateTokenDisplay();
+      slotResult.textContent = "Tokens restored! Spin to play again!";
+      countdown.style.display = "none";
+
+      // Re-enable the Spin button after cooldown
+      spinButton.disabled = false;
+      isCooldown = false;
+    }
+  }, 1000);
+}
+
 // Spin Slot functionality
 function spinSlot() {
+  if (isCooldown) return; // Prevent spinning while on cooldown
+
   const slots = ["🍎", "🍒", "🍇", "🍊", "🍉", "🍋"];
   const slotResult = document.getElementById("slotResult");
+  const spinButton = document.getElementById("spinButton");
 
   if (tokens <= 0) {
-    slotResult.textContent = "You have no more tokens! Add more to play.";
+    // Start the cooldown if no tokens are left
+    restoreTokens();
+    isCooldown = true;
     return;
   }
 
@@ -683,7 +872,7 @@ function spinSlot() {
       tryAgainMessage.style.marginTop = "20px";
       slotResult.appendChild(tryAgainMessage);
     }
-  }, 2000);
+  }, 2000); // Simulate slot spinning for 2 seconds
 }
 
 // Initialize the token display when the page loads
@@ -693,6 +882,27 @@ function initializeTokens() {
 
 // Initialize the token display on page load
 window.onload = initializeTokens;
+
+// Function to create emoji rain effect
+function showEmojiRain() {
+  for (let i = 0; i < 30; i++) {
+    const emoji = document.createElement("div");
+    emoji.className = "emoji";
+    emoji.textContent = "🎉";
+    emoji.style.left = `${Math.random() * 100}vw`;
+    emoji.style.animationDelay = `${Math.random() * 2}s`;
+    document.body.appendChild(emoji);
+
+    setTimeout(() => {
+      emoji.remove();
+    }, 5000);
+  }
+
+  setTimeout(() => {
+    const emojis = document.querySelectorAll(".emoji");
+    emojis.forEach((emoji) => emoji.remove());
+  }, 5000);
+}
 
 // Function to create emoji rain effect
 function showEmojiRain() {
