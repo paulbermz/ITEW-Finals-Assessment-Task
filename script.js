@@ -11,6 +11,12 @@ function navigateTo(event, element) {
   // Add the active class to the clicked link
   element.classList.add("active");
 
+  // Close any existing full-screen container
+  const fullScreenContainer = document.querySelector("#fullScreenContainer");
+  if (fullScreenContainer) {
+    document.body.removeChild(fullScreenContainer);
+  }
+
   // Push state to history
   history.pushState({ app: appName }, "", `#${appName}`);
 
