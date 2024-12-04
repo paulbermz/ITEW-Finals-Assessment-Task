@@ -1610,7 +1610,7 @@ main {
   overflow: scroll;
   white-space: nowrap;
   display: inline-flex;
-  width: 82rem;
+  width: 150rem;
   padding: 3rem 0;
   margin: 0 -3rem;
   -ms-overflow-style: none;
@@ -1768,7 +1768,6 @@ footer {
 
 /* General Media Queries */
 @media (max-width: 1200px) {
-  /* Adjust container padding for smaller screens */
   main {
     padding: 0 2rem;
   }
@@ -1823,15 +1822,17 @@ footer {
     margin-top: 1rem;
   }
 
-  /* Adjust carousel for smaller screens */
   .carousel--list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
     width: 100%;
     padding: 1rem 0;
     margin: 0;
   }
 
   .carousel--item img {
-    width: 12rem;
+    width: 100%;
   }
 
   footer {
@@ -1840,6 +1841,19 @@ footer {
 }
 
 @media (max-width: 576px) {
+  .carousel--list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 0;
+    margin: 0;
+  }
+
+  .carousel--item img {
+    width: 100%;
+  }
+
   /* Adjust logo and menu items */
   .primary-menu--logo {
     left: 1rem;
@@ -1891,6 +1905,19 @@ footer {
 }
 
 @media (max-width: 425px) {
+  .carousel--list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 0;
+    margin: 0;
+  }
+
+  .carousel--item img {
+    width: 100%;
+  }
+
   /* Stack navigation items */
   nav {
     text-align: center;
