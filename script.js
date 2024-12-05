@@ -983,6 +983,58 @@ if (!location.hash || location.hash === "#home") {
   navigateTo("slotMachine");
 }
 
+document
+  .querySelector(".navbar-brand i")
+  .addEventListener("click", function () {
+    const body = document.body;
+
+    // List of phrases to display
+    const phrases = [
+      "pwede ka ba makasama sa pailaw lods?",
+      "i miss you",
+      "unblock mo na ako",
+      "can we talk again?",
+      "saan ba ako nagkulang?",
+      "tara habol tayo sa pasko lods",
+    ];
+
+    // Create a container for the raining text
+    const rainContainer = document.createElement("div");
+    rainContainer.id = "rainContainer";
+    rainContainer.style.position = "fixed";
+    rainContainer.style.top = "0";
+    rainContainer.style.left = "0";
+    rainContainer.style.width = "100%";
+    rainContainer.style.height = "100%";
+    rainContainer.style.pointerEvents = "none";
+    rainContainer.style.zIndex = "9999";
+    body.appendChild(rainContainer);
+
+    // Generate random text elements
+    const createRandomText = () => {
+      const randomText = document.createElement("span");
+      randomText.textContent =
+        phrases[Math.floor(Math.random() * phrases.length)];
+      randomText.className = "raining-text";
+      randomText.style.left = `${Math.random() * 100}%`;
+      rainContainer.appendChild(randomText);
+
+      // Remove the text after animation ends
+      setTimeout(() => {
+        rainContainer.removeChild(randomText);
+      }, 6000);
+    };
+
+    // Create multiple text elements every 200ms
+    const interval = setInterval(createRandomText, 200);
+
+    // Stop creating text and remove the container after 5 seconds
+    setTimeout(() => {
+      clearInterval(interval);
+      body.removeChild(rainContainer);
+    }, 6000);
+  });
+
 // Function to toggle between Dark Mode and Light Mode
 function toggleTheme() {
   const body = document.body;

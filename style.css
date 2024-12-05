@@ -1286,6 +1286,61 @@ body.dark-mode #taskList .delete-button:hover {
   font-weight: 600;
 }
 
+.raining-text {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  pointer-events: none;
+  animation: fall 5s ease-in-out forwards;
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.4);
+  background-color: #e10000;
+}
+
+/* Keyframes for falling animation */
+@keyframes fall {
+  0% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-50%, 50vh) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 110vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Adding a soft glow effect */
+.raining-text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  filter: blur(8px);
+  opacity: 0.5;
+  z-index: -1;
+  background-color: transparent;
+  animation: glow 5s infinite ease-in-out;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .navbar .form-control {
