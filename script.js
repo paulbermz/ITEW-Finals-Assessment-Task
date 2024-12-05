@@ -634,7 +634,7 @@ function backToHome() {
         <div>
           <strong>Amir Khan</strong>
           <br />
-          <small>5 mins ago</small>
+          <small>10 mins ago</small>
         </div>
       </div>
       <div class="card-body">
@@ -755,6 +755,41 @@ function backToHome() {
            emperors Geta and Caracalla. Lucius must use his past to find the strength and honor to return Rome to its glory.  </p>
         <img
           src="images/gladiator.png"
+          alt="Post Content"
+          class="img-fluid rounded"
+        />
+      </div>
+      <div class="card-footer d-flex justify-content-around">
+        <button class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-hand-thumbs-up"></i> React
+        </button>
+        <button class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-chat"></i> Review
+        </button>
+        <button class="btn btn-outline-success btn-sm">
+          <i class="bi bi-share"></i> Share
+        </button>
+      </div>
+    </div>
+     <div class="card mb-3">
+      <div class="card-header d-flex align-items-center">
+        <img
+          src="images/Malupiton.png" 
+          alt="User"
+          class="rounded-circle me-2"
+        />
+        <div>
+          <strong>Malupiton Official</strong>
+          <br />
+          <small>3 hours ago</small>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Comedian and content creator Joel Ravanera, widely known as 'Malupiton,' has confirmed that he will be starring in his own debut film. 
+           In an exclusive interview on the latest episode of 'Toni Talks' on December 1, Ravanera shared details about the upcoming project, revealing 
+           that filming is already underway.</p>
+        <img
+          src="images/Lapuk.png"
           alt="Post Content"
           class="img-fluid rounded"
         />
