@@ -430,142 +430,6 @@ document.querySelectorAll(".primary-menu--item a").forEach((link) => {
   });
 });
 
-// To-Do List initialization to load tasks
-function initializeToDoList() {
-  const taskList = document.getElementById("taskList");
-  const emptyMessage = document.getElementById("emptyMessage");
-  const totalCount = document.getElementById("totalCount");
-  const savedTasks = JSON.parse(localStorage.getItem("toDoListTasks")) || [];
-
-  taskList.innerHTML = "";
-
-  if (savedTasks.length === 0) {
-    emptyMessage.style.display = "block";
-    totalCount.textContent = "Total: 0 tasks";
-  } else {
-    emptyMessage.style.display = "none";
-    savedTasks.forEach((task) => {
-      addTaskToDOM(task.text, task.completed);
-    });
-    totalCount.textContent = `Total: ${savedTasks.length} tasks`;
-  }
-}
-
-// Save tasks to localStorage
-function saveTasks() {
-  const taskList = document.getElementById("taskList");
-  const tasks = Array.from(taskList.children).map((taskItem) => ({
-    text: taskItem.querySelector(".task-text").textContent,
-    completed: taskItem.querySelector("input[type='checkbox']").checked,
-  }));
-  localStorage.setItem("toDoListTasks", JSON.stringify(tasks));
-
-  const emptyMessage = document.getElementById("emptyMessage");
-  const totalCount = document.getElementById("totalCount");
-
-  if (tasks.length === 0) {
-    emptyMessage.style.display = "block";
-    totalCount.textContent = "Total: 0 tasks";
-  } else {
-    emptyMessage.style.display = "none";
-    totalCount.textContent = `Total: ${tasks.length} tasks`;
-  }
-}
-
-// Function to add tasks
-function addTask() {
-  const taskInput = document.getElementById("taskInput");
-  const taskText = taskInput.value.trim();
-
-  if (taskText) {
-    addTaskToDOM(taskText);
-    taskInput.value = "";
-    saveTasks();
-  }
-}
-
-// Function to add a task to the DOM
-function addTaskToDOM(taskText, completed = false) {
-  const taskList = document.getElementById("taskList");
-  const emptyMessage = document.getElementById("emptyMessage");
-
-  const taskItem = document.createElement("li");
-  taskItem.className =
-    "list-group-item d-flex justify-content-between align-items-center";
-
-  // Checkbox for completion
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.checked = completed;
-  checkbox.className = "form-check-input me-2";
-  checkbox.onclick = () => {
-    taskTextElement.style.textDecoration = checkbox.checked
-      ? "line-through"
-      : "none";
-    saveTasks();
-  };
-
-  // Task text
-  const taskTextElement = document.createElement("span");
-  taskTextElement.className = "task-text";
-  taskTextElement.textContent = taskText;
-  if (completed) {
-    taskTextElement.style.textDecoration = "line-through";
-  }
-
-  // Edit button
-  const editButton = document.createElement("button");
-  editButton.className = "btn btn-warning btn-sm me-2";
-  editButton.innerHTML = '<i class="bi bi-pencil"></i>'; // Pencil icon
-  editButton.onclick = () => {
-    const newText = prompt("Edit your task:", taskTextElement.textContent);
-    if (newText !== null && newText.trim() !== "") {
-      taskTextElement.textContent = newText.trim();
-      saveTasks(); // Save the edited tasks
-    }
-  };
-
-  // Delete button
-  const deleteButton = document.createElement("button");
-  deleteButton.className = "btn btn-danger btn-sm";
-  deleteButton.innerHTML = '<i class="bi bi-trash"></i>'; // Trash icon
-  deleteButton.onclick = () => {
-    taskList.removeChild(taskItem);
-    saveTasks();
-  };
-
-  // Append elements to the task item
-  taskItem.appendChild(checkbox);
-  taskItem.appendChild(taskTextElement);
-  taskItem.appendChild(editButton);
-  taskItem.appendChild(deleteButton);
-
-  // Append the task item to the list
-  taskList.appendChild(taskItem);
-
-  // Hide empty message when a task is added
-  emptyMessage.style.display = "none";
-}
-
-// Function to delete all tasks
-function deleteAllTasks() {
-  const taskList = document.getElementById("taskList");
-
-  if (taskList.children.length === 0) {
-    alert("No tasks to delete!");
-    return;
-  }
-
-  // Show confirmation dialog
-  if (confirm("Are you sure you want to delete all tasks?")) {
-    taskList.innerHTML = "";
-    saveTasks();
-  }
-}
-
-// Initialize the to-do list on page load
-window.onload = initializeToDoList;
-
 // Function to navigate back to the home screen
 function backToHome() {
   const newsFeed = document.querySelector("#newsFeedContainer");
@@ -780,6 +644,142 @@ function backToHome() {
     </div>
   `;
 }
+
+// To-Do List initialization to load tasks
+function initializeToDoList() {
+  const taskList = document.getElementById("taskList");
+  const emptyMessage = document.getElementById("emptyMessage");
+  const totalCount = document.getElementById("totalCount");
+  const savedTasks = JSON.parse(localStorage.getItem("toDoListTasks")) || [];
+
+  taskList.innerHTML = "";
+
+  if (savedTasks.length === 0) {
+    emptyMessage.style.display = "block";
+    totalCount.textContent = "Total: 0 tasks";
+  } else {
+    emptyMessage.style.display = "none";
+    savedTasks.forEach((task) => {
+      addTaskToDOM(task.text, task.completed);
+    });
+    totalCount.textContent = `Total: ${savedTasks.length} tasks`;
+  }
+}
+
+// Save tasks to localStorage
+function saveTasks() {
+  const taskList = document.getElementById("taskList");
+  const tasks = Array.from(taskList.children).map((taskItem) => ({
+    text: taskItem.querySelector(".task-text").textContent,
+    completed: taskItem.querySelector("input[type='checkbox']").checked,
+  }));
+  localStorage.setItem("toDoListTasks", JSON.stringify(tasks));
+
+  const emptyMessage = document.getElementById("emptyMessage");
+  const totalCount = document.getElementById("totalCount");
+
+  if (tasks.length === 0) {
+    emptyMessage.style.display = "block";
+    totalCount.textContent = "Total: 0 tasks";
+  } else {
+    emptyMessage.style.display = "none";
+    totalCount.textContent = `Total: ${tasks.length} tasks`;
+  }
+}
+
+// Function to add tasks
+function addTask() {
+  const taskInput = document.getElementById("taskInput");
+  const taskText = taskInput.value.trim();
+
+  if (taskText) {
+    addTaskToDOM(taskText);
+    taskInput.value = "";
+    saveTasks();
+  }
+}
+
+// Function to add a task to the DOM
+function addTaskToDOM(taskText, completed = false) {
+  const taskList = document.getElementById("taskList");
+  const emptyMessage = document.getElementById("emptyMessage");
+
+  const taskItem = document.createElement("li");
+  taskItem.className =
+    "list-group-item d-flex justify-content-between align-items-center";
+
+  // Checkbox for completion
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = completed;
+  checkbox.className = "form-check-input me-2";
+  checkbox.onclick = () => {
+    taskTextElement.style.textDecoration = checkbox.checked
+      ? "line-through"
+      : "none";
+    saveTasks();
+  };
+
+  // Task text
+  const taskTextElement = document.createElement("span");
+  taskTextElement.className = "task-text";
+  taskTextElement.textContent = taskText;
+  if (completed) {
+    taskTextElement.style.textDecoration = "line-through";
+  }
+
+  // Edit button
+  const editButton = document.createElement("button");
+  editButton.className = "btn btn-warning btn-sm me-2";
+  editButton.innerHTML = '<i class="bi bi-pencil"></i>'; // Pencil icon
+  editButton.onclick = () => {
+    const newText = prompt("Edit your task:", taskTextElement.textContent);
+    if (newText !== null && newText.trim() !== "") {
+      taskTextElement.textContent = newText.trim();
+      saveTasks(); // Save the edited tasks
+    }
+  };
+
+  // Delete button
+  const deleteButton = document.createElement("button");
+  deleteButton.className = "btn btn-danger btn-sm";
+  deleteButton.innerHTML = '<i class="bi bi-trash"></i>'; // Trash icon
+  deleteButton.onclick = () => {
+    taskList.removeChild(taskItem);
+    saveTasks();
+  };
+
+  // Append elements to the task item
+  taskItem.appendChild(checkbox);
+  taskItem.appendChild(taskTextElement);
+  taskItem.appendChild(editButton);
+  taskItem.appendChild(deleteButton);
+
+  // Append the task item to the list
+  taskList.appendChild(taskItem);
+
+  // Hide empty message when a task is added
+  emptyMessage.style.display = "none";
+}
+
+// Function to delete all tasks
+function deleteAllTasks() {
+  const taskList = document.getElementById("taskList");
+
+  if (taskList.children.length === 0) {
+    alert("No tasks to delete!");
+    return;
+  }
+
+  // Show confirmation dialog
+  if (confirm("Are you sure you want to delete all tasks?")) {
+    taskList.innerHTML = "";
+    saveTasks();
+  }
+}
+
+// Initialize the to-do list on page load
+window.onload = initializeToDoList;
 
 let tokens = 10;
 let isCooldown = false;
