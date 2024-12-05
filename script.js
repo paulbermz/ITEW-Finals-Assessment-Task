@@ -566,34 +566,6 @@ function deleteAllTasks() {
 // Initialize the to-do list on page load
 window.onload = initializeToDoList;
 
-// Function for slot machine spinning logic (for demonstration)
-function spinSlot() {
-  const slots = ["🍎", "🍒", "🍇", "🍊", "🍉", "🍋"];
-  const slotResult = document.getElementById("slotResult");
-
-  slotResult.textContent = "Spinning...";
-
-  setTimeout(function () {
-    const randomSlots = [
-      slots[Math.floor(Math.random() * slots.length)],
-      slots[Math.floor(Math.random() * slots.length)],
-      slots[Math.floor(Math.random() * slots.length)],
-    ];
-
-    slotResult.textContent = randomSlots.join(" | ");
-
-    // Check for a win (if all slots match)
-    if (
-      randomSlots[0] === randomSlots[1] &&
-      randomSlots[1] === randomSlots[2]
-    ) {
-      alert("🎉 Congratulations, you win! 🎉");
-    } else {
-      alert("Try again!");
-    }
-  }, 2000);
-}
-
 // Function to navigate back to the home screen
 function backToHome() {
   const newsFeed = document.querySelector("#newsFeedContainer");
@@ -810,7 +782,7 @@ function backToHome() {
 }
 
 let tokens = 10;
-let isCooldown = false; // Track whether the cooldown is active
+let isCooldown = false;
 let countdownTimerInterval;
 
 // Function to update the token display
@@ -988,17 +960,14 @@ document
   .addEventListener("click", function () {
     const body = document.body;
 
-    // List of phrases to display
     const phrases = [
       "pwede ka ba makasama sa pailaw lods?",
+      "tara habol tayo sa pasko lods",
       "i miss you",
-      "unblock mo na ako",
       "can we talk again?",
       "saan ba ako nagkulang?",
-      "tara habol tayo sa pasko lods",
     ];
 
-    // Create a container for the raining text
     const rainContainer = document.createElement("div");
     rainContainer.id = "rainContainer";
     rainContainer.style.position = "fixed";
@@ -1010,7 +979,6 @@ document
     rainContainer.style.zIndex = "9999";
     body.appendChild(rainContainer);
 
-    // Generate random text elements
     const createRandomText = () => {
       const randomText = document.createElement("span");
       randomText.textContent =
@@ -1019,16 +987,13 @@ document
       randomText.style.left = `${Math.random() * 100}%`;
       rainContainer.appendChild(randomText);
 
-      // Remove the text after animation ends
       setTimeout(() => {
         rainContainer.removeChild(randomText);
       }, 6000);
     };
 
-    // Create multiple text elements every 200ms
     const interval = setInterval(createRandomText, 200);
 
-    // Stop creating text and remove the container after 5 seconds
     setTimeout(() => {
       clearInterval(interval);
       body.removeChild(rainContainer);
